@@ -1,0 +1,53 @@
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+
+.snippets {
+  padding: 15px;
+  background-color: white;
+  margin: 0 auto;
+}
+
+.snippets-form {
+  position: relative;
+  font-size: 16px;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.snippets-list {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.snippets-form .form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.snippets-form-submit {
+  margin-top: 3px;
+}
+
+.snippets-list-row-code {
+
+}
+
+.snippets-list-row code{
+  width: 100%;
+}
+
+
+.snippets-list-row {
+  padding-top: 15px;
+  border-bottom: 1px dotted #eee;
+}
