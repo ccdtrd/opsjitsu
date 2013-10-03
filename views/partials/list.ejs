@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-lg-12">
+    <textarea class="form-control" rows="3" ng-model="snippet.body" placeholder="Code Goes here" autofocus></textarea>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2 col-md-offset-10 snippets-form-submit" style="text-align: right">
+    <div class="btn-group" style="padding-bottom:5px;">
+      <div class="btn-group">
+        <button type="button" class="btn btn-default btn-md" ng-click="create()">
+          <span class="glyphicon glyphicon-cloud-upload"> Post</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="snippets-list">
+  <div ng-repeat="snippet in snippets">
+    <div class="row snippets-list-row-code">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="btn-group" style="padding-bottom:5px;">
+              <div class="btn-group">
+                <button type="button" class="btn btn-default btn-md" ng-click="delete()">
+                  <span class="glyphicon glyphicon-remove-circle"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <span snippet-body-highlighter snippet-body="snippet.body"></span>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
