@@ -35,19 +35,17 @@ body {
 }
 
 .snippets-form-submit {
-  margin-top: 3px;
+  margin-top: 8px;
 }
 
 .snippets-list-row-code {
-
+    border-bottom: 1px dotted #eee;
+    padding-bottom: 15px;
+    padding-top: 10px;
+    /*margin-top: 25px;*/
+    /*margin-bottom: 25px;*/
 }
 
 .snippets-list-row code{
   width: 100%;
-}
-
-
-.snippets-list-row {
-  padding-top: 15px;
-  border-bottom: 1px dotted #eee;
 }

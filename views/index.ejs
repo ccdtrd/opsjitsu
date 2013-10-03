@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="opsjitsu">
   <head>
-    <title>Bootstrap 101 Template</title>
+    <title>OpsJitsu - Welcome to Operations Ninjitsu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="stylesheets/bootstrap.css" rel="stylesheet" media="screen">
@@ -21,7 +21,7 @@
       <form class="snippets-form" method="POST" action="upload">
         <div class="row">
           <div class="col-lg-12">
-            <textarea class="form-control" rows="3" name="snippet" ng-model="yourName" placeholder="Paste OpsJitsu Code Here" autofocus></textarea>
+            <textarea class="form-control" rows="3" name="snippet" ng-model="yourName" placeholder="Code Goes here" autofocus></textarea>
           </div>
         </div>
         <div class="row">
@@ -35,9 +35,23 @@
         
 
       <div class="snippets-list">
-        <div class="row snippets-list-row" ng-repeat="snippet in snippets">
-          <div class="col-md-12 snippets-list-row-code">
-            <pre>{{snippet.body}}</pre>
+        <div ng-repeat="snippet in snippets">
+          <div class="row snippets-list-row-code" id="{{snippet._id}}">
+              <div class="row">
+                <div class="col-md-2">
+                  <div class="btn-group" style="padding-bottom:5px;">
+                    <div class="btn-group">
+                      <span snippet-button snippet-glyph-name-value="glyphicon-remove-circle" snippet-button-action="delete" snippet-id="snippet._id" ng-click="delete()"></span>
+                      <span snippet-button snippet-glyph-name-value="glyphicon-edit" snippet-button-action="edit" snippet-id="snippet._id" ng-click="edit()"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                    <div snippet-body-highlighter snippet-body-value="snippet.body"></div>
+                </div>
+              </div>
           </div>
         </div>
       </div>
@@ -47,7 +61,10 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="//code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="javascripts/bootstrap.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
+    <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
 
     <!-- my own magic -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
