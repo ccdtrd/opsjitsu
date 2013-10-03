@@ -6,6 +6,13 @@
 var Snippet = require("../models/snippet.js");
 var hljs = require('highlight.js');
 
+exports.partials = function(req, res){
+  var filename = req.params.filename;
+  if(!filename) return;  // might want to change this
+  res.render("partials/" + filename );
+};
+
+
 exports.index = function(req, res){
 	res.render('index', {});
 };
@@ -22,11 +29,11 @@ exports.list = function(req, res){
 	});
 };
 
-exports.upload = function(req, res){
-	if(req.body.snippet){
-		console.log("saving new snippet: [" + req.body.snippet + "]");
+exports.create = function(req, res){
+	if(req.body.body){
+		console.log("saving new snippet.body: [" + req.body.body + "]");
 
-		var snippet = new Snippet({ body: req.body.snippet });
+		var snippet = new Snippet({ body: req.body.body });
 		snippet.save();
 	
 	}else{
