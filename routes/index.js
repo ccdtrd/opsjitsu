@@ -36,11 +36,12 @@ exports.create = function(req, res){
 
 		var snippet = new Snippet({ body: req.body.body });
 		snippet.save();
-	
+		res.send(snippet);
+
 	}else{
 		console.log("failed to find req.body.snippet");
+		res.status(500).send("Failed");
 	}
-	res.redirect('/');
 };
 
 

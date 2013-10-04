@@ -1,10 +1,11 @@
 {
   "name": "opsjitsu",
   "subdomain": "opsjitsu",
-  "version": "0.0.1-13",
+  "version": "0.0.1-15",
   "private": true,
   "domains": [
-    "opsjitsu.com"
+    "opsjitsu.com",
+    "www.opsjitsu.com"
   ],
   "scripts": {
     "start": "node app.js"

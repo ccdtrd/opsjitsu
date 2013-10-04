@@ -51,19 +51,19 @@ function SnippetListCtrl($scope, $http, Snippets) {
 		};
 		$scope.create = function(){
 			console.log("create");
-			Snippets.create($http, $scope.snippet).
+			Snippets.create($http, this.snippet).
 				success(function(data){
 					console.log("create success");
+					$scope.snippets.unshift(data);
 					$scope.snippet.body = "";
-					$scope.list();
 				});
 		};
 		$scope.delete = function(){
 			console.log("delete " + this.snippet._id);
+			$scope.snippets.splice($scope.snippets.indexOf(this.snippet),1);
 			Snippets.delete($http, this.snippet).
 				success(function(data){
 					console.log("delete success");
-					$scope.list();
 				});
 		}
 	});
