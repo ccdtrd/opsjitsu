@@ -5,8 +5,6 @@
 
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
-var login = require('./routes/login');
 var http = require('http');
 var path = require('path');
 var port = process.env.PORT || 3000,

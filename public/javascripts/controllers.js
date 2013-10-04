@@ -19,21 +19,23 @@ angular.module('opsjitsu',[]).
     config(function($routeProvider) {
     	$routeProvider.
     		when('/', {controller:SnippetListCtrl, templateUrl:'/partials/list'}).
-    		when('/new', {controller:SnippetCreateCtrl, templateUrl:'/partials/create'}).
 	      	otherwise({redirectTo:'/'});
     }).
-	directive('snippetBodyHighlighter', function () {
-	    return {
-	      restrict: 'A',
-	      template: '<pre><code ng-bind-html-unsafe="snippetBody"></code></pre>',
-	      scope: {
-	        snippetBody: '='
-	      },
-	      link: function (scope, elem, attrs) {
-	      	scope.snippetBody = hljs.highlightAuto(scope.snippetBody).value;
-	      }
-	  }
-	})
+    filter('moment', function() {
+    	return function(dateString, format) {
+        	return moment(dateString).fromNow();
+    	}
+	}).
+	filter('hilight', function() {
+    	return function(body) {
+    		if(this.snippet.language){
+    			console.log("highlight " + this.snippet.language);
+        		return hljs.highlight(this.snippet.language, body).value;
+        	}else{
+        		return hljs.highlightAuto(body).value;
+        	}
+    	}
+	});
      
 function SnippetListCtrl($scope, $http, Snippets) {
 	Snippets.list($http).success(function (data){
@@ -47,16 +49,15 @@ function SnippetListCtrl($scope, $http, Snippets) {
 				$scope.snippets = data;
 			});	
 		};
-
 		$scope.create = function(){
 			console.log("create");
 			Snippets.create($http, $scope.snippet).
 				success(function(data){
 					console.log("create success");
+					$scope.snippet.body = "";
 					$scope.list();
 				});
 		};
-
 		$scope.delete = function(){
 			console.log("delete " + this.snippet._id);
 			Snippets.delete($http, this.snippet).
@@ -67,70 +68,3 @@ function SnippetListCtrl($scope, $http, Snippets) {
 		}
 	});
 }
-
-function SnippetCreateCtrl($scope, $http, Snippets) {
-	
-};
-
-
-// var opsjitsu = angular.module('opsjitsu', []);
-
-// opsjitsu.
-// 	controller("SnippetListCtrl", function($scope, $http) {
-// 		$http.get('/list').success(function(data) {
-// 			console.log("list success " + data.length);
-// 			$scope.snippets = data;
-// 		});
-
-// 		$scope.delete = function(snippet){
-// 			snippet.snippetBody = "foo";
-// 			console.log('delete '+ snippet._id);
-// 		};
-
-// 	}).
-// 	directive('snippetButton', function($q, $http, $templateCache) {
-// 		return {
-// 			restrict: 'A',
-// 			template: 	'<button type="button" class="btn btn-default btn-md" ng-click="delete()">'+
-// 							'<span class="glyphicon {{glyphiconValue}}"></span>'+
-// 						'</button>',	
-// 			scope: {
-// 				snippetId: '=',
-// 				glyphiconValue: '@',
-// 				click: '@'
-// 			},
-// 			controller: function ($scope, $http) {
-// 				$scope.snippetDelete = function(snippetId){
-// 					console.log('/delete/'+snippetId);
-// 					return $http.get('/delete/'+ snippetId).then(function(data) {
-// 						console.log("delete success");
-// 						$("#"+snippetId+"_post").fadeOut();
-// 					});
-// 				};
-// 			},
-// 			link: function (scope, elem, attrs) {
-// 				console.log(attrs.glyphiconValue);
-
-// 				scope.delete = function(){
-// 					console.log('delete '+ scope.snippetId);
-// 					scope.snippetDelete(scope.snippetId).then(scope.snippetList);
-// 				}
-// 			}
-// 		}
-// 	}).
-// 	directive('snippetBodyHighlighter', function () {
-// 	    return {
-// 	      restrict: 'A',
-// 	      template: '<pre><code ng-bind-html-unsafe="snippetBody"></code></pre>',
-// 	      scope: {
-// 	        snippetBody: '=',
-// 	        snippetId: '='
-// 	      },
-// 	      link: function (scope, elem, attrs) {
-// 	      	// console.log(scope.snippetId);
-// 	      	scope.snippetBody = hljs.highlightAuto(scope.snippetBody).value;
-// 	      }
-// 	  }
-// 	});
-
-

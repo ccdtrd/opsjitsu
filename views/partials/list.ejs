@@ -19,8 +19,8 @@
   <div ng-repeat="snippet in snippets">
     <div class="row snippets-list-row-code">
         <div class="row">
-          <div class="col-md-3">
-            <div class="btn-group" style="padding-bottom:5px;">
+          <div class="col-md-1">
+            <div class="btn-group">
               <div class="btn-group">
                 <button type="button" class="btn btn-default btn-md" ng-click="delete()">
                   <span class="glyphicon glyphicon-remove-circle"></span>
@@ -28,10 +28,13 @@
               </div>
             </div>
           </div>
+          <div class="col-md-2 col-md-offset-9">
+            <p class="text-right">{{snippet.date | moment:'M/D/YYYY h:m A'}}</p>
+          </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <span snippet-body-highlighter snippet-body="snippet.body"></span>
+            <pre><code ng-bind-html-unsafe="snippet.body | hilight"></code></pre>
           </div>
         </div>
     </div>

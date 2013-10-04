@@ -18,12 +18,13 @@ exports.index = function(req, res){
 };
 
 exports.list = function(req, res){
-	Snippet.find(function (err, snippets) {
+	Snippet.find({}).sort('field -date').execFind(function (err, snippets) {
 		if (err){ 
 			console.error("Failed to find all snippet");
 			res.send();
 
 		}else{
+			console.info(snippets);
 			res.send(snippets);
 		}	
 	});
